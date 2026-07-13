@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>投稿プレビュー(内部確認用)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#000000">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<div id="app">
+  <div id="phone">
+    <div id="statusbar" aria-hidden="true">
+      <span class="sb-time">9:41</span>
+      <span class="sb-icons">
+        <svg viewBox="0 0 18 12" width="18" height="12"><rect x="0" y="7" width="3" height="5" rx=".5"/><rect x="5" y="5" width="3" height="7" rx=".5"/><rect x="10" y="3" width="3" height="9" rx=".5"/><rect x="15" y="0" width="3" height="12" rx=".5"/></svg>
+        <svg viewBox="0 0 24 12" width="24" height="12"><rect x="0" y="1" width="20" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="1.5" y="2.5" width="15" height="7" rx="1.2"/><rect x="21" y="4" width="2" height="4" rx="1"/></svg>
+      </span>
+    </div>
+
+    <!-- ===== フィード画面 ===== -->
+    <section id="feed-view" class="view">
+      <header class="top-tabs" aria-hidden="true">
+        <span class="tt-item">フォロー中</span>
+        <span class="tt-item tt-active">おすすめ<i class="tt-underline"></i></span>
+        <button class="tt-search" aria-label="検索" tabindex="-1">
+          <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+
+      <button id="info-btn" aria-label="内部情報">ℹ️</button>
+
+      <div id="feed"><!-- posts injected by app.js --></div>
+
+      <nav class="bottom-tabbar" aria-hidden="true">
+        <span class="bt-item bt-active">
+          <svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-8.5Z" fill="currentColor"/></svg>
+          <span class="bt-label">ホーム</span>
+        </span>
+        <span class="bt-item">
+          <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="9" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 14c2.6.3 4.5 2.4 4.5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16.5" cy="7.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          <span class="bt-label">友達</span>
+        </span>
+        <span class="bt-item bt-create" aria-hidden="true">
+          <svg viewBox="0 0 40 26" width="40" height="26">
+            <rect x="4" y="1" width="28" height="24" rx="7" fill="#fff"/>
+            <rect x="1" y="1" width="28" height="24" rx="7" fill="#25F4EE" opacity=".85"/>
+            <rect x="7" y="1" width="28" height="24" rx="7" fill="#FE2C55" opacity=".85"/>
+            <rect x="4" y="1" width="28" height="24" rx="7" fill="#fff" opacity=".92"/>
+            <path d="M20 8v10M15 13h10" stroke="#161616" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="bt-item">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span class="bt-label">メッセージ</span>
+        </span>
+        <a href="#/profile" class="bt-item bt-profile" id="tab-profile">
+          <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span class="bt-label">プロフィール</span>
+        </a>
+      </nav>
+    </section>
+
+    <!-- ===== プロフィール画面 ===== -->
+    <section id="profile-view" class="view">
+      <header class="profile-header">
+        <a href="#/feed" class="ph-back" aria-label="戻る">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <span class="ph-title" id="profile-title">プロフィール</span>
+        <span class="ph-menu" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20"><line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+      </header>
+      <div class="profile-body">
+        <div class="p-avatar" id="profile-avatar"></div>
+        <div class="p-handle" id="profile-handle"></div>
+        <div class="p-stats">
+          <div class="p-stat"><span class="n">-</span><span class="l">フォロー中</span></div>
+          <div class="p-stat"><span class="n">-</span><span class="l">フォロワー</span></div>
+          <div class="p-stat"><span class="n">-</span><span class="l">いいね</span></div>
+        </div>
+        <button class="p-follow" tabindex="-1">フォロー <span class="p-follow-caret">▾</span></button>
+        <div class="p-bio" id="profile-bio"></div>
+        <div class="p-link" id="profile-link">
+          <span class="p-link-icon" aria-hidden="true">🔗</span>
+          <span id="profile-link-text"></span>
+        </div>
+        <div class="p-grid" id="profile-grid"></div>
+      </div>
+    </section>
+
+    <!-- ===== コメントシート ===== -->
+    <div id="comment-sheet" class="sheet">
+      <div class="sheet-grabber"></div>
+      <header class="sheet-head">
+        <span class="sheet-title">コメント</span>
+        <button class="sheet-close" data-close="comment" aria-label="閉じる">
+          <svg viewBox="0 0 24 24" width="18" height="18"><line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+      <div class="sheet-body" id="comment-body"></div>
+      <div class="comment-input-mock">
+        <span class="ci-avatar"></span>
+        <span class="ci-text">コメントを追加…</span>
+      </div>
+    </div>
+
+    <!-- ===== ℹ️ 内部情報シート ===== -->
+    <div id="info-sheet" class="sheet">
+      <div class="sheet-grabber"></div>
+      <header class="sheet-head">
+        <span class="sheet-title">内部情報</span>
+        <button class="sheet-close" data-close="info" aria-label="閉じる">
+          <svg viewBox="0 0 24 24" width="18" height="18"><line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+      <div class="sheet-body" id="info-body"></div>
+    </div>
+
+    <div id="backdrop"></div>
+  </div>
+</div>
+
+<script>window.FEED = /*__FEED_DATA__*/{"account": {"handle": "nurse_tenshoku_labo", "display_name": "元病棟ナース📋転職ラボ", "bio": ["病棟5年目→情報発信はじめました", "年収・夜勤・転職時期まで正直にまとめてます", "👇私がお世話になった転職相談👇"], "link_label": "ad-lp1.nurse-recruiting.jp/…", "avatar": "auto", "default_music": "オリジナル楽曲 - 元病棟ナース📋転職ラボ", "default_pinned_comment": null, "posting_note": "TikTok Studio webまたはスマホ「フォトモード」で1枚目=表紙の並び順のまま選択→キャプションをℹ️シートからコピペ→BGMはアプリ内トレンド音源→投稿。"}, "posts": [{"id": "01_nenshu_hikaku", "caption_body": "看護師の年収、職場でこんなに違うって知ってました？🤍 調べてみたら夜勤の有無でだいぶ変わるらしいです", "hashtags": ["#看護師", "#看護師の日常", "#看護師転職", "#美容看護師", "#看護師あるある"], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "01_nenshu_hikaku", "ref_label": null, "type": "image", "images": [{"url": "media/01_nenshu_hikaku/01.webp?v=c7a3580c", "v": "c7a3580c"}, {"url": "media/01_nenshu_hikaku/02.webp?v=9d3376a6", "v": "9d3376a6"}, {"url": "media/01_nenshu_hikaku/03.webp?v=e8391d44", "v": "e8391d44"}, {"url": "media/01_nenshu_hikaku/04.webp?v=83a30ab3", "v": "83a30ab3"}, {"url": "media/01_nenshu_hikaku/05.webp?v=5e26dd02", "v": "5e26dd02"}, {"url": "media/01_nenshu_hikaku/06.webp?v=38638489", "v": "38638489"}]}, {"id": "02_yakin_futan", "caption_body": "夜勤のリアルなデータ調べてみたら想像以上だった…😴 無理してる人多いんだなって", "hashtags": ["#看護師", "#看護師あるある", "#看護師の日常", "#夜勤", "#看護師転職"], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "02_yakin_futan", "ref_label": null, "type": "image", "images": [{"url": "media/02_yakin_futan/01.webp?v=0829a2e3", "v": "0829a2e3"}, {"url": "media/02_yakin_futan/02.webp?v=b27d6eae", "v": "b27d6eae"}, {"url": "media/02_yakin_futan/03.webp?v=482bf443", "v": "482bf443"}, {"url": "media/02_yakin_futan/04.webp?v=49d58d68", "v": "49d58d68"}, {"url": "media/02_yakin_futan/05.webp?v=37dbb272", "v": "37dbb272"}, {"url": "media/02_yakin_futan/06.webp?v=c55054f1", "v": "c55054f1"}]}, {"id": "03_byoto_biyou_jittai", "caption_body": "病棟→美容看護師で変わることをまとめてみた🌸 いいことも大変なことも両方あるらしい", "hashtags": ["#美容看護師", "#看護師", "#看護師の日常", "#看護師転職", "#美容クリニック"], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "03_byoto_biyou_jittai", "ref_label": null, "type": "image", "images": [{"url": "media/03_byoto_biyou_jittai/01.webp?v=e64d89bc", "v": "e64d89bc"}, {"url": "media/03_byoto_biyou_jittai/02.webp?v=9c39db69", "v": "9c39db69"}, {"url": "media/03_byoto_biyou_jittai/03.webp?v=f6580b4a", "v": "f6580b4a"}, {"url": "media/03_byoto_biyou_jittai/04.webp?v=90d28ad4", "v": "90d28ad4"}, {"url": "media/03_byoto_biyou_jittai/05.webp?v=2977d78a", "v": "2977d78a"}, {"url": "media/03_byoto_biyou_jittai/06.webp?v=78f6770c", "v": "78f6770c"}]}, {"id": "04_tenshoku_timing", "caption_body": "転職のタイミングって実は結構重要らしい📅 知らずに損してる人多そうだった", "hashtags": ["#看護師", "#看護師転職", "#看護師の日常", "#転職", "#看護師あるある"], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "04_tenshoku_timing", "ref_label": null, "type": "image", "images": [{"url": "media/04_tenshoku_timing/01.webp?v=d7b8b982", "v": "d7b8b982"}, {"url": "media/04_tenshoku_timing/02.webp?v=02b6e85a", "v": "02b6e85a"}, {"url": "media/04_tenshoku_timing/03.webp?v=1915fd9f", "v": "1915fd9f"}, {"url": "media/04_tenshoku_timing/04.webp?v=86bbae85", "v": "86bbae85"}, {"url": "media/04_tenshoku_timing/05.webp?v=1be487a8", "v": "1be487a8"}, {"url": "media/04_tenshoku_timing/06.webp?v=06124505", "v": "06124505"}]}, {"id": "05_agent_erabikata", "caption_body": "転職エージェント選びで見るべきポイント調べてまとめてみた🔍 意外と知らないこと多かった", "hashtags": ["#看護師", "#看護師転職", "#転職エージェント", "#看護師の日常", "#美容看護師"], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "05_agent_erabikata", "ref_label": null, "type": "image", "images": [{"url": "media/05_agent_erabikata/01.webp?v=01eb3960", "v": "01eb3960"}, {"url": "media/05_agent_erabikata/02.webp?v=7515539c", "v": "7515539c"}, {"url": "media/05_agent_erabikata/03.webp?v=7fa74f01", "v": "7fa74f01"}, {"url": "media/05_agent_erabikata/04.webp?v=e19dea14", "v": "e19dea14"}, {"url": "media/05_agent_erabikata/05.webp?v=cf0037be", "v": "cf0037be"}, {"url": "media/05_agent_erabikata/06.webp?v=e2df5be5", "v": "e2df5be5"}]}, {"id": "06_beforeafter", "caption_body": "新卒2年目で、病棟の看護師を辞めました。\n\n小さい頃からずっと憧れてた仕事。\n実習も国家試験も必死に乗り越えて、やっと掴んだ資格でした。\n\n急性期の病棟で働き始めて、大変だけどやりがいも感じてた。\nでも心のどこかでずっと引っかかってて。\n\n「この生活、ずっと続けるのかな」って。\n\n夜勤のたびに崩れる生活リズム、\n気づいたら暴飲暴食が当たり前になってて、\n去年だけで熱を出したのも数えきれないくらい。\n喉が痛くて水も飲めない日もあって、\n薬に頼りながら働く毎日で、心も体もすり減ってた。\n\n辞めたいって伝えたときは\n「もったいない」「次どうするの」って\nたくさん引き止められたけど、\n\n患者さんの「ありがとう」で頑張れるのも、\n一時的なものだって気づいたんです。\n\n自分を壊してまで人のケアを続けるのは違うなって。\n\n資格はどうしても活かしたくて、美容看護師に転職を決意。\n最初は大手の転職サイトに登録して、\n美容クリニックを何社か受けたけど、全部お見送りでした。\n\n正直あの時はけっこう落ち込んで。\n\nそんな時、先に美容看護師になってた友達に相談したら、\n「美容特化のところの方が良かったよ」って教えてくれて、\n半信半疑で登録してみたんです。\n\n担当してくれたのは元看護師の方で、\n条件に合う求人紹介から面接対策まで、\nすごく親身にサポートしてくれて。\n\nそのおかげで、1ヶ月くらいで内定をもらえました。\n\n今は髪色もネイルも自由で、\n夜勤も残業もなくて、\nプライベートの時間もちゃんと取れてます。\n\nもし今、私と同じように悩んでる人がいたら、\n無理せず一度相談だけでもしてみてほしいです。", "hashtags": ["#看護師", "#看護師の日常", "#仕事辞めたい", "#看護師転職"], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "転職前後Before/After　マスク姿→美容ナース姿", "ref_label": "いいね 71,600 ・ 保存 6,907(2025-12-02)", "type": "image", "images": [{"url": "media/06_beforeafter/01.webp?v=d0309ec2", "v": "d0309ec2"}]}, {"id": "07_fusen_memo", "caption_body": "看護師なのに残業•夜勤もないしネイル自由💅\n本当に転職してよかったです🤍✨", "hashtags": ["#美容ナース", "#美容看護師", "#看護師", "#看護師の日常", "#看護師転職"], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "付箋メモ　お局トラウマ→美容ナースで解消", "ref_label": "いいね 52,400 ・ 保存 8,967 ・ コメント 97(2025-11-25)", "type": "image", "images": [{"url": "media/07_fusen_memo/01.webp?v=08e8acba", "v": "08e8acba"}, {"url": "media/07_fusen_memo/02.webp?v=953f9434", "v": "953f9434"}, {"url": "media/07_fusen_memo/03.webp?v=25c1cf6d", "v": "25c1cf6d"}, {"url": "media/07_fusen_memo/04.webp?v=6a518ea4", "v": "6a518ea4"}, {"url": "media/07_fusen_memo/05.webp?v=dfec0723", "v": "dfec0723"}, {"url": "media/07_fusen_memo/06.webp?v=0f7ff96c", "v": "0f7ff96c"}]}, {"id": "08_otsubone_line", "caption_body": "看護師を辞めて半年くらい経った頃、\n前の病棟にいたお局から急にLINEが来ました。\n\n「最近どう?」みたいな軽い感じだったけど、\n内容を見て思わず二度見しちゃって。\n\nあの人、絶対自分の非を認めないし、\n弱さなんて見せないタイプだったから余計に。\n\n正直、私が体調崩して辞めることになった一番の原因は\nこの人だったんですよね。\n\n「患者さんのために」が口癖なのに、\n自分の機嫌で現場の空気を全部決めるような人で。\n\nミスしそうになった時も\n「誰かが物の場所変えたから」って人のせいにするのに、\n私が少し手間取ると\n「これだから最近の子は」ってみんなの前で言う。\n\n「先輩、何か手伝いますか?」って聞いたら\n「手伝うじゃなくて、できることありますかでしょ」\nって言い直させられて、\n素直に聞き直したら\n「自分で考えて」\n\n……聞いてるのに。\n\n一番きつかったのは、バタバタの夕方に\n「今日は予定あるから帰るね、経験だと思って」\nって自分の受け持ち患者の記録まで置いていかれた日。\n\n結局22時まで一人で残業して、\n翌朝フラフラの私に\n「まだ準備できてないの?」って言ってきた人が、\n「ありがとう」も「ごめんね」も\n一度も言ったことなかった人からの、半年ぶりの連絡。\n\n開いてみたら、\n「若手がどんどん辞めて夜勤増えてキツくて」\n「私も資格活かして転職しようかな」\n「でも美容ってやりがいないんでしょ?」\n\n…相変わらずだなと思いつつ、\nなんとなく分かっちゃったんです。\n\nこれ、今の状況がしんどくて、\n本当は私のやり方を知りたいんだろうなって。\n\nだから普通に返しました。\n\n「私は残業もほぼないし夜勤もなくて、\n月に1回旅行行けるくらい余裕あります。\nネイルも髪色も自由なので、\n今すごく気に入ってますよ」\n\n「へー。でも臨床経験浅いとブラックなとこしかないでしょ」\n\n「美容特化の転職エージェントがあって、\n条件に合う求人とか面接対策まで\nちゃんとサポートしてもらえたので、\n1ヶ月くらいで理想の職場決まりました」\n\n「そういうのってどうやって見つけるの」\n\n……素直に聞けないところ、変わってないなと思って、\n「気になったら調べてみてください」とだけ送って閉じました。\n\nもし今、当時の私と同じように\n限界を感じてる人がいたら、\n無理せず一度相談だけでもしてみてほしいです。", "hashtags": [], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "お局LINEスクショ　闇バイトみたいな職場から脱出", "ref_label": "いいね 36,200 ・ 保存 1,302 ・ コメント 109(2026-03-20)", "type": "image", "images": [{"url": "media/08_otsubone_line/01.webp?v=3ae5a250", "v": "3ae5a250"}]}, {"id": "09_ichinichi_routine", "caption_body": "", "hashtags": ["#美容看護師", "#看護師", "#看護師の日常", "#美容クリニック", "#看護師転職"], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "美容ナースの一日　最高すぎてしぬ‼", "ref_label": "いいね 695 ・ 保存 114 ・ コメント 24(2026-07-08)", "type": "image", "images": [{"url": "media/09_ichinichi_routine/01.webp?v=d134f62c", "v": "d134f62c"}, {"url": "media/09_ichinichi_routine/02.webp?v=4a48a84d", "v": "4a48a84d"}, {"url": "media/09_ichinichi_routine/03.webp?v=d199f7f8", "v": "d199f7f8"}, {"url": "media/09_ichinichi_routine/04.webp?v=402fbb31", "v": "402fbb31"}, {"url": "media/09_ichinichi_routine/05.webp?v=7ec61f00", "v": "7ec61f00"}, {"url": "media/09_ichinichi_routine/06.webp?v=7f55085a", "v": "7f55085a"}, {"url": "media/09_ichinichi_routine/07.webp?v=92a74bc2", "v": "92a74bc2"}, {"url": "media/09_ichinichi_routine/08.webp?v=0efecffb", "v": "0efecffb"}, {"url": "media/09_ichinichi_routine/09.webp?v=3c9d1830", "v": "3c9d1830"}]}, {"id": "10_yamete_wakatta_6sen", "caption_body": "", "hashtags": ["#美容看護師", "#看護師", "#看護師転職", "#看護師辞めたい", "#看護師あるある"], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "看護師を辞めて分かったこと　6選", "ref_label": "いいね 3,814 ・ 保存 568 ・ コメント 64(2026-06-12)", "type": "image", "images": [{"url": "media/10_yamete_wakatta_6sen/01.webp?v=688a9f8e", "v": "688a9f8e"}, {"url": "media/10_yamete_wakatta_6sen/02.webp?v=8778b6af", "v": "8778b6af"}, {"url": "media/10_yamete_wakatta_6sen/03.webp?v=ac76e5a5", "v": "ac76e5a5"}, {"url": "media/10_yamete_wakatta_6sen/04.webp?v=7e3ab3c4", "v": "7e3ab3c4"}, {"url": "media/10_yamete_wakatta_6sen/05.webp?v=fbaa9f37", "v": "fbaa9f37"}, {"url": "media/10_yamete_wakatta_6sen/06.webp?v=bb3cd851", "v": "bb3cd851"}, {"url": "media/10_yamete_wakatta_6sen/07.webp?v=9fd21af6", "v": "9fd21af6"}]}, {"id": "11_hatarakikata_5sen", "caption_body": "美容看護師に転職してからずっとこれ🥹\n全看護師におすすめの職業すぎる✨🤍", "hashtags": ["#美容看護師", "#看護師", "#看護師の日常", "#看護師転職", "#看護師辞めたい"], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "美容看護師の働き方　5選", "ref_label": "いいね 2,063 ・ 保存 361 ・ コメント 23(2026-06-08)", "type": "image", "images": [{"url": "media/11_hatarakikata_5sen/01.webp?v=ea355f7c", "v": "ea355f7c"}, {"url": "media/11_hatarakikata_5sen/02.webp?v=19e90bdf", "v": "19e90bdf"}, {"url": "media/11_hatarakikata_5sen/03.webp?v=b412a795", "v": "b412a795"}, {"url": "media/11_hatarakikata_5sen/04.webp?v=bc5c3e07", "v": "bc5c3e07"}, {"url": "media/11_hatarakikata_5sen/05.webp?v=4955c4a4", "v": "4955c4a4"}, {"url": "media/11_hatarakikata_5sen/06.webp?v=3366837f", "v": "3366837f"}]}, {"id": "12_muiteru_5sen", "caption_body": "", "hashtags": ["#美容看護師", "#看護師", "#看護師転職", "#看護師の日常", "#美容クリニック"], "music": null, "pinned_comment": null, "date_label": null, "bg": "black", "title": "美容看護師に向いてる子　5選", "ref_label": "いいね 430 ・ 保存 89 ・ コメント 23(2026-07-06)", "type": "image", "images": [{"url": "media/12_muiteru_5sen/01.webp?v=d322007b", "v": "d322007b"}, {"url": "media/12_muiteru_5sen/02.webp?v=e255eb0b", "v": "e255eb0b"}, {"url": "media/12_muiteru_5sen/03.webp?v=724bb55f", "v": "724bb55f"}, {"url": "media/12_muiteru_5sen/04.webp?v=32d738a8", "v": "32d738a8"}, {"url": "media/12_muiteru_5sen/05.webp?v=4ee66577", "v": "4ee66577"}]}]};</script>
+<script src="assets/app.js"></script>
+</body>
+</html>
