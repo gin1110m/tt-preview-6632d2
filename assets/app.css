@@ -208,6 +208,22 @@ html, body {
   pointer-events: none;
 }
 
+.id-badge {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 55px);
+  left: 46px;
+  z-index: 8;
+  background: rgba(0,0,0,.45);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .01em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
 .dots {
   position: absolute;
   bottom: 128px;

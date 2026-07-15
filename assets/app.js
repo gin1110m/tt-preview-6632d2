@@ -133,6 +133,12 @@
         "</div>"
       : "";
 
+    var idBadge = post.batch_label
+      ? '<div class="id-badge">' +
+        escapeHtml(post.batch_label) +
+        "</div>"
+      : "";
+
     var captionHtml = renderCaptionHTML(post.caption_body, post.hashtags);
 
     var musicText = post.music || ACCOUNT.default_music || "";
@@ -147,6 +153,7 @@
       '<div class="slides">' +
       slidesHtml +
       "</div>" +
+      idBadge +
       pageBadge +
       dots +
       '<div class="rail">' +
