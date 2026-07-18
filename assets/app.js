@@ -439,7 +439,14 @@
         "</div></div>"
       : "";
 
+    var statusBlock = post.status_note
+      ? '<div class="info-block info-status-block"><div class="info-label">ステータス</div><div class="info-status">' +
+        escapeHtml(post.status_note) +
+        "</div></div>"
+      : "";
+
     body.innerHTML =
+      statusBlock +
       '<div class="info-block"><div class="info-label">内部タイトル</div><div class="info-title">' +
       escapeHtml(post.title || post.id) +
       "</div></div>" +
