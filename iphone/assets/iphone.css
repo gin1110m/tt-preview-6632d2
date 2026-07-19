@@ -1,0 +1,455 @@
+/* iPhone投稿キット — 内部確認/実運用ツール(閲覧+ローカルチェックのみ・外部送信なし) */
+
+:root {
+  --bg: #0b0b0d;
+  --bg-grad: radial-gradient(120% 90% at 50% -10%, rgba(254,44,85,.10), rgba(11,11,13,0) 55%),
+             radial-gradient(120% 90% at 90% 0%, rgba(37,244,238,.06), rgba(11,11,13,0) 50%);
+  --card: rgba(255,255,255,.05);
+  --card-border: rgba(255,255,255,.10);
+  --card-border-strong: rgba(255,255,255,.16);
+  --text: #f5f5f7;
+  --text-dim: rgba(245,245,247,.68);
+  --text-faint: rgba(245,245,247,.48);
+  --accent: #FE2C55;
+  --accent-2: #25F4EE;
+  --ok: #22c55e;
+  --warn: #ffb020;
+  --radius: 18px;
+  --radius-sm: 12px;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-image: var(--bg-grad);
+  padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+}
+
+#kit {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 20px) 16px 24px;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ============ ヘッダー ============ */
+.kit-header {
+  text-align: center;
+  padding: 4px 0 20px;
+}
+.qr-img {
+  width: 128px;
+  height: 128px;
+  border-radius: 14px;
+  background: #fff;
+  padding: 8px;
+  margin: 0 auto 14px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+.kit-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+}
+.kit-sub {
+  font-size: 15px;
+  color: var(--text-dim);
+  margin: 0 0 8px;
+}
+.kit-meta {
+  font-size: 12px;
+  color: var(--text-faint);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ============ クイックナビ ============ */
+.quick-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.quick-nav a {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  padding: 9px 14px;
+  text-decoration: none;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+/* ============ カード共通 ============ */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 18px 16px 20px;
+  margin-bottom: 16px;
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 32px;
+  margin-bottom: 12px;
+}
+.card-icon { font-size: 20px; line-height: 1; }
+.card-head h2 {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 32px;
+}
+
+.hint-text {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin: 8px 0 0;
+}
+.hint-text.warn-text {
+  color: #ffcf80;
+  background: rgba(255,176,32,.12);
+  border: 1px solid rgba(255,176,32,.35);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 4px;
+}
+
+/* ============ チェックリスト ============ */
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 4px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  cursor: pointer;
+  min-height: 44px;
+}
+.check-row:first-of-type { border-top: none; }
+.check-row input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  border-radius: 7px;
+  border: 2px solid rgba(255,255,255,.3);
+  background: rgba(255,255,255,.04);
+  position: relative;
+}
+.check-row input[type="checkbox"]:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.check-row input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px; top: 2px;
+  width: 6px; height: 11px;
+  border: solid #fff;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(40deg);
+}
+.check-row span, .check-row b { font-size: 15px; }
+.check-row.big-check span { font-size: 15.5px; font-weight: 600; }
+.check-row.checked span { color: var(--text-faint); text-decoration: line-through; }
+
+/* ============ 開設手順ガイド ============ */
+.guide-sub {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--accent-2);
+  margin: 18px 0 4px;
+}
+.guide-sub:first-of-type { margin-top: 8px; }
+.guide-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: guide;
+}
+.guide-list li { position: relative; }
+.guide-list .check-row { padding-left: 34px; }
+.guide-list .check-row::before {
+  counter-increment: guide;
+  content: counter(guide, decimal-leading-zero) ".";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-faint);
+}
+
+/* ============ フィールド行(コピー可能な値) ============ */
+.field-row {
+  padding: 10px 0;
+  border-top: 1px solid rgba(255,255,255,.07);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+.field-row:first-of-type { border-top: none; }
+.field-row-block { flex-direction: column; align-items: stretch; }
+.field-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  flex-basis: 100%;
+}
+.field-value {
+  font-size: 15.5px;
+  font-weight: 600;
+  flex: 1 1 auto;
+  min-width: 0;
+  word-break: break-word;
+}
+.field-value.mono { font-variant-ligatures: none; }
+.field-value.pre {
+  white-space: pre-wrap;
+  font-weight: 500;
+  background: rgba(255,255,255,.045);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 13px;
+  line-height: 1.75;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 2px;
+}
+.copy-btn {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(254,44,85,.14);
+  border: 1px solid rgba(254,44,85,.3);
+  border-radius: 999px;
+  padding: 10px 16px;
+  min-height: 40px;
+  white-space: nowrap;
+}
+.copy-btn.primary {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.copy-btn:disabled {
+  color: var(--text-faint);
+  background: rgba(255,255,255,.05);
+  border-color: var(--card-border);
+}
+.copy-btn.copied {
+  color: #fff;
+  background: var(--ok);
+  border-color: var(--ok);
+}
+
+.status-pill {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.status-pending {
+  color: #ffcf80;
+  background: rgba(255,176,32,.16);
+  border: 1px solid rgba(255,176,32,.4);
+}
+
+/* ============ アカウントカード アイコン ============ */
+.icon-grid {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 14px 0 6px;
+  flex-wrap: wrap;
+}
+.icon-item {
+  text-align: center;
+  width: 140px;
+}
+.icon-save-hint {
+  font-size: 11.5px;
+  color: var(--text-faint);
+  margin-bottom: 6px;
+}
+.icon-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--card-border-strong);
+}
+.icon-label {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ============ 投稿セクション ============ */
+.posts-heading {
+  font-size: 19px;
+  font-weight: 800;
+  margin: 6px 4px 12px;
+}
+.post-card { margin-bottom: 18px; }
+.post-order-badge {
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 4px 11px;
+  line-height: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+.post-card .card-head h2 { font-family: -apple-system, monospace; font-size: 16px; }
+.post-cover-title {
+  font-size: 14.5px;
+  color: var(--text-dim);
+  background: rgba(255,255,255,.045);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  margin-bottom: 12px;
+}
+.post-save-hint {
+  font-size: 13px;
+  color: var(--accent-2);
+  background: rgba(37,244,238,.08);
+  border: 1px solid rgba(37,244,238,.25);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  margin-bottom: 12px;
+}
+.post-images {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.post-img-block { }
+.img-index {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-faint);
+  margin-bottom: 4px;
+}
+.post-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1080 / 1350;
+  border-radius: var(--radius-sm);
+  background: #111;
+  object-fit: cover;
+}
+.posted-check {
+  margin-top: 10px;
+  background: rgba(34,197,94,.07);
+  border: 1px solid rgba(34,197,94,.25);
+  border-radius: var(--radius-sm);
+  padding: 11px 12px;
+}
+.posted-check span { font-weight: 700; }
+
+.bottom-pad { height: 8px; }
+
+/* ============ 下部固定ナビ ============ */
+.bottom-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 40;
+  background: rgba(14,14,16,.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--card-border);
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+}
+.progress-wrap { margin-bottom: 8px; }
+.progress-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-dim);
+  margin-bottom: 5px;
+}
+.progress-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,.12);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width .25s ease;
+}
+.nav-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-chips::-webkit-scrollbar { display: none; }
+.nav-chip {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ============ デスクトップ(Mac確認用) ============ */
+@media (min-width: 620px) {
+  body { display: flex; justify-content: center; }
+  #kit { padding-top: 32px; }
+}
+
+@media (prefers-color-scheme: light) {
+  /* ネイティブ感優先の単一ダークテーマで統一(ライト切替は行わない・意図的) */
+}
